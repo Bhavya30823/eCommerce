@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.PrecomputedText;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -19,6 +21,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import Model.Users;
+import Prevalent.Prevalent;
+import io.paperdb.Paper;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText InputPhoneNumber, InputPassword;
@@ -26,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private ProgressDialog loadingBar;
     private String parentDbName = "Users";
+    private CheckBox chkBoxRememberMe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -40,6 +45,8 @@ public class LoginActivity extends AppCompatActivity {
         InputPassword= (EditText) findViewById(R.id.login_password_input);
         loadingBar=new ProgressDialog(this);
 
+        chkBoxRememberMe = (CheckBox) findViewById(R.id.remember_me_chkb);
+        Paper.init(this);
 
         LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +84,9 @@ public class LoginActivity extends AppCompatActivity {
             loadingBar.setTitle("Login Account");
             loadingBar.setMessage("please check, while we are checking the credentials");
             loadingBar.setCanceledOnTouchOutside(false);
+
             loadingBar.show();
+
             AllowAccesToAccount(phone,password);
 
 
@@ -88,6 +97,15 @@ public class LoginActivity extends AppCompatActivity {
 
     private void AllowAccesToAccount(final String phone, final String password)
     {
+        if (chkBoxRememberMe.isChecked())
+        {
+            Paper.book().write(Prevalent.UserPhoneKey, phone);
+            Paper.book().write(Prevalent.UserPasswordKey,password);
+        }
+
+
+
+
         final DatabaseReference RootRef;
         RootRef = FirebaseDatabase.getInstance().getReference();
 
