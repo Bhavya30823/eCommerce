@@ -1,17 +1,15 @@
 package com.example.ecommerce;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
-import android.content.ContentProviderClient;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -67,10 +65,10 @@ public class MainActivity extends AppCompatActivity {
                if (!TextUtils.isEmpty(UserPhoneKey)&& !TextUtils.isEmpty(UserPasswordKey))
                {
                    AllowAccess(UserPhoneKey, UserPasswordKey);
+
                    loadingBar.setTitle("Already Logged in");
                    loadingBar.setMessage("please wait");
                    loadingBar.setCanceledOnTouchOutside(false);
-
                    loadingBar.show();
                }
            }
@@ -101,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
                             loadingBar.dismiss();
 
                             Intent intent= new Intent(MainActivity.this, HomeActivity.class);
+                            Prevalent.currentOnlineUser= usersData;
                             startActivity(intent);
 
                         }
