@@ -34,6 +34,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:19.1.1'
     implementation 'com.firebaseui:firebase-ui-database:6.2.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
     implementation 'com.github.rey5137:material:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
@@ -44,7 +45,9 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'androidx.navigation:navigation-ui:2.2.2'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'com.cepheuen.elegant-number-button:lib:1.0.2'
     testImplementation 'junit:junit:4.12'
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
